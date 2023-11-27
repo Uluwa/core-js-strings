@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-param-reassign */
 /* *******************************************************************************************
  *                                                                                           *
  * Please read the following tutorial before implementing tasks:                              *
@@ -156,8 +158,12 @@ function repeatString(rep, n) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const index = str.indexOf(value);
+  if (index !== -1) {
+    return str.slice(0, index) + str.slice(index + value.length);
+  }
+  return str;
 }
 
 /**
@@ -172,8 +178,12 @@ function removeFirstOccurrences(/* str, value */) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const lastIndex = str.lastIndexOf(value);
+  if (lastIndex !== -1) {
+    return str.slice(0, lastIndex) + str.slice(lastIndex + value.length);
+  }
+  return str;
 }
 
 /**
@@ -188,14 +198,25 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(sum) {
-  const result = [];
-  for (let i = 0; i < sum.length; i += 1) {
-    if (sum.charCodeAt(i) > 0) {
-      result.push(sum.charCodeAt(i));
-    }
+function sumOfCodes(str) {
+  // const result = [];
+  // for (let i = 0; i < sum.length; i += 1) {
+  //   if (sum.charCodeAt(i) > 0) {
+  //     result.push(sum.charCodeAt(i));
+  //   }
+  // }
+  // return result.reduce((acc, curr) => acc + curr, 0);
+  if (!str) {
+    return 0; // Return 0 for empty or undefined strings
   }
-  return result.reduce((acc, curr) => acc + curr, 0);
+
+  let sum = 0;
+
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+
+  return sum;
 }
 
 /**
@@ -242,7 +263,15 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  return `"0${minutes}:${seconds}"`;
+  const formattedMinutes = Math.max(0, Math.floor(minutes))
+    .toString()
+    .padStart(2, '0');
+  const formattedSeconds = Math.max(0, Math.floor(seconds))
+    .toString()
+    .padStart(2, '0');
+
+  // Return the formatted time string
+  return `${formattedMinutes}:${formattedSeconds}`;
 }
 
 /**
@@ -512,8 +541,63 @@ function encodeToRot13(str) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const initialDeck = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  const index = initialDeck.indexOf(value);
+  return index;
 }
 
 module.exports = {
